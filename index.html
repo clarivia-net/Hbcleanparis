@@ -1,0 +1,1794 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hb Clean Paris | Excellence & Raffinement</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <style>
+        :root {
+            --deep-navy: #0a0a0a;
+            --royal-blue: #1a1a1a;
+            --accent-blue: #2a2a2a;
+            --gold: #c9a96e;
+            --light-gold: #e8d9b9;
+            --dark-gold: #a88c4d;
+            --ivory: #f8f5f0;
+            --charcoal: #2a2a2a;
+            --transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--charcoal);
+            background-color: var(--ivory);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header Transparent qui Devient Visible au Scroll */
+        header {
+            background: transparent;
+            color: white;
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 1rem 0;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(201, 169, 110, 0.2);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            color: var(--gold);
+            margin-right: 12px;
+            font-size: 2.2rem;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .logo-main {
+            font-size: 1.8rem;
+            line-height: 1;
+            color: white;
+            letter-spacing: 1px;
+        }
+
+        .logo-sub {
+            font-size: 0.65rem;
+            letter-spacing: 4px;
+            color: var(--light-gold);
+            margin-top: 3px;
+            text-transform: uppercase;
+        }
+
+        /* Navigation améliorée pour mobile */
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 2.5rem;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+        }
+
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            bottom: -8px;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover {
+            color: var(--light-gold);
+        }
+
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            color: var(--deep-navy);
+            padding: 14px 32px;
+            border-radius: 2px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .cta-button:hover:before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(201, 169, 110, 0.4);
+        }
+
+        /* Menu hamburger pour mobile */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: white;
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        /* Hero Section avec Carrousel */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .carousel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .carousel-slide:nth-child(1) {
+            background-image: url('images/pexels-tima-miroshnichenko-6872171.jpg');
+        }
+
+        .carousel-slide:nth-child(2) {
+            background-image: url('images/pexels-tima-miroshnichenko-6872150.jpg');
+        }
+
+        .carousel-slide:nth-child(3) {
+            background-image: url('images/pexels-tima-miroshnichenko-6873101.jpg');
+        }
+
+        .carousel-slide:nth-child(4) {
+            background-image: url('images/pexels-torque-detail-3806966-7154631.jpg');
+        }
+
+        .carousel-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(30, 30, 30, 0.8));
+            z-index: 2;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 0 20px;
+            z-index: 3;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.5s;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.8s;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 1.1s;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 14px 32px;
+            border-radius: 2px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Section Signature */
+        .signature {
+            padding: 6rem 0;
+            background-color: white;
+            position: relative;
+        }
+
+        .signature:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/brilliant.png');
+            opacity: 0.03;
+            z-index: 1;
+        }
+
+        .signature-content {
+            display: flex;
+            align-items: center;
+            gap: 5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .signature-text {
+            flex: 1;
+        }
+
+        .signature-text h2 {
+            font-size: 3rem;
+            color: var(--deep-navy);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .signature-text h2:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background: var(--gold);
+            bottom: -15px;
+            left: 0;
+        }
+
+        .signature-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .signature-image {
+            flex: 1;
+            height: 500px;
+            background: url('https://images.unsplash.com/photo-1507136566006-cfc505b114fc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1921&q=80');
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .signature-image:before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--gold);
+            z-index: -1;
+        }
+
+        /* Services Section - Cartes Améliorées */
+        .services {
+            padding: 8rem 0;
+            background: linear-gradient(to bottom, #f8f5f0, #f0ebe2);
+            position: relative;
+        }
+
+        .services:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/brilliant.png');
+            opacity: 0.03;
+            z-index: 1;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            color: var(--deep-navy);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background: var(--gold);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 1.5rem auto 0;
+            color: #555;
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 12px;
+            height: 360px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            position: relative;
+            border: 1px solid rgba(201, 169, 110, 0.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+            border-color: rgba(201, 169, 110, 0.3);
+        }
+
+        .service-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--gold), var(--dark-gold));
+            z-index: 2;
+        }
+
+        .service-img {
+            height: 240px;
+            background-size: cover;
+            background-position: center;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .service-card:hover .service-img {
+            transform: scale(1.05);
+        }
+
+        .service-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--gold);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-content {
+            padding: 2.5rem;
+            position: relative;
+        }
+
+        .service-content h3 {
+            color: var(--deep-navy);
+            margin-bottom: 1.2rem;
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .service-content h3 i {
+            color: var(--gold);
+            font-size: 1.8rem;
+        }
+
+        .service-content p {
+            color: #666;
+            margin-bottom: 1.8rem;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+
+        .service-features li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .service-features li:last-child {
+            border-bottom: none;
+        }
+
+        .service-features li i {
+            color: var(--gold);
+            margin-right: 15px;
+            font-size: 1.2rem;
+            width: 25px;
+            text-align: center;
+        }
+
+        .service-features span {
+            flex: 1;
+            color: #555;
+            font-weight: 400;
+        }
+
+        .service-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .service-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--deep-navy);
+            display: flex;
+            align-items: baseline;
+        }
+
+        .price-currency {
+            font-size: 1.2rem;
+            color: var(--gold);
+            margin-right: 5px;
+        }
+
+        .price-note {
+            font-size: 0.9rem;
+            color: #888;
+            margin-left: 10px;
+            font-weight: 400;
+        }
+
+        .service-duration {
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 500;
+            background: rgba(201, 169, 110, 0.1);
+            padding: 6px 12px;
+            border-radius: 15px;
+        }
+
+        /* Réalisations Section */
+        .realisations {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, var(--deep-navy), var(--royal-blue));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .realisations:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/diamond-upholstery.png');
+            opacity: 0.05;
+            z-index: 1;
+        }
+
+        .section-title-light h2 {
+            color: white;
+        }
+
+        .section-title-light h2:after {
+            background: var(--gold);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .gallery-item {
+            height: 300px;
+            border-radius: 2px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(10, 10, 10, 0.9));
+            padding: 2.5rem 2rem 2rem;
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h4 {
+            color: white;
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
+        }
+
+        .gallery-overlay p {
+            color: var(--light-gold);
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        /* Devis Section Luxueuse */
+        .devis {
+            padding: 8rem 0;
+            background-color: white;
+            position: relative;
+        }
+
+        .devis:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/brilliant.png');
+            opacity: 0.03;
+            z-index: 1;
+        }
+
+        .devis-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .devis-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .devis-content h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: var(--deep-navy);
+            letter-spacing: 1px;
+        }
+
+        .devis-content p {
+            margin-bottom: 1.8rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .contact-info {
+            margin-top: 2.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .contact-item i {
+            color: var(--gold);
+            font-size: 1.3rem;
+            width: 35px;
+        }
+
+        .devis-form {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 3.5rem;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(10, 10, 10, 0.1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(201, 169, 110, 0.2);
+        }
+
+        .devis-form:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--gold), var(--dark-gold));
+            z-index: 2;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .form-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+            box-shadow: 0 8px 25px rgba(201, 169, 110, 0.3);
+        }
+
+        .form-title {
+            color: var(--deep-navy);
+            margin-bottom: 0.5rem;
+            font-size: 2.2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .form-title:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .form-subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin-top: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            color: var(--deep-navy);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background-color: rgba(248, 245, 240, 0.5);
+            font-family: 'Inter', sans-serif;
+            transition: var(--transition);
+            font-size: 1rem;
+            color: var(--charcoal);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--gold);
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.1);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c9a96e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 20px center;
+            background-size: 16px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .form-footer {
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .form-note {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .submit-btn:hover:before {
+            left: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 169, 110, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #080808;
+            color: white;
+            padding: 5rem 0 2.5rem;
+            position: relative;
+        }
+
+        footer:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gold);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 4rem;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-column h3 {
+            color: var(--gold);
+            margin-bottom: 1.8rem;
+            font-size: 1.4rem;
+            position: relative;
+            padding-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: var(--gold);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-column p, .footer-column a {
+            color: #ccc;
+            margin-bottom: 1rem;
+            display: block;
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 300;
+        }
+
+        .footer-column a:hover {
+            color: var(--gold);
+            transform: translateX(8px);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 2rem;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--gold);
+            color: var(--deep-navy);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #999;
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: var(--transition);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Messages de statut pour EmailJS */
+        .status-message {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .status-success {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: #2e7d32;
+            border: 1px solid #4caf50;
+        }
+
+        .status-error {
+            background-color: rgba(244, 67, 54, 0.1);
+            color: #c62828;
+            border: 1px solid #f44336;
+        }
+
+        /* Responsive - Améliorations pour mobile */
+        @media (max-width: 1200px) {
+            .hero-content h1 {
+                font-size: 3.8rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            }
+            
+            .signature-content {
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 3.2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.3rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.8rem;
+            }
+            
+            .devis-content h2 {
+                font-size: 2.8rem;
+            }
+            
+            .signature-content {
+                flex-direction: column;
+            }
+            
+            .signature-image {
+                width: 100%;
+            }
+            
+            /* Menu hamburger visible sur tablette */
+            .menu-toggle {
+                display: flex;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(12px);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding-top: 100px;
+                transition: var(--transition);
+                z-index: 999;
+            }
+            
+            nav ul.active {
+                right: 0;
+            }
+            
+            nav ul li {
+                margin: 0;
+                width: 100%;
+                padding: 0 2rem;
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 1.2rem 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                font-size: 1.1rem;
+            }
+            
+            nav ul li:last-child a {
+                border-bottom: none;
+            }
+            
+            .header-content .cta-button {
+                display: none;
+            }
+            
+            .mobile-cta {
+                display: block;
+                margin-top: 2rem;
+                text-align: center;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: row;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .section-title h2 {
+                font-size: 2.4rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .devis-container {
+                flex-direction: column;
+            }
+            
+            .devis-form {
+                width: 100%;
+            }
+            
+            .service-footer {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .devis-form {
+                padding: 2.5rem 2rem;
+            }
+            
+            .service-card, .gallery-item {
+                margin-bottom: 2rem;
+            }
+            
+            .logo-main {
+                font-size: 1.5rem;
+            }
+            
+            .signature-text h2 {
+                font-size: 2.5rem;
+            }
+            
+            .services, .realisations, .devis, .signature {
+                padding: 4rem 0;
+            }
+            
+            .service-content {
+                padding: 2rem;
+            }
+            
+            .service-img {
+                height: 200px;
+            }
+            
+            .service-card {
+                height: auto;
+            }
+        }
+        
+        /* CTA mobile pour les petits écrans */
+        .mobile-cta {
+            display: none;
+        }
+        
+        @media (max-width: 992px) {
+            .mobile-cta {
+                display: block;
+                margin-top: 2rem;
+                text-align: center;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Transparent qui Devient Visible au Scroll -->
+    <header id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                  <img src="images/1000005067.jpg" alt="" srcset="" width="80px" height="40px">
+                </div>
+                <nav>
+                    <div class="menu-toggle" id="menuToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <ul id="navMenu">
+                        <li><a href="#accueil">Accueil</a></li>
+                        <li><a href="#signature">Notre Signature</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#realisations">Réalisations</a></li>
+                        <li><a href="#devis">Devis</a></li>
+                        <li class="mobile-cta">
+                            <a href="#devis" class="cta-button">Prendre Rendez-vous</a>
+                        </li>
+                    </ul>
+                </nav>
+                <a href="#devis" class="cta-button desktop-cta">Prendre Rendez-vous</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section avec Carrousel -->
+    <section class="hero" id="accueil">
+        <div class="carousel">
+            <div class="carousel-slide active"></div>
+            <div class="carousel-slide"></div>
+            <div class="carousel-slide"></div>
+            <div class="carousel-slide"></div>
+            <div class="carousel-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <h1>Révélez la Beauté Originelle de Votre Véhicule</h1>
+           
+            <div class="hero-buttons">
+                <a href="#services" class="cta-button">Découvrir Nos Prestations</a>
+                <a href="#devis" class="btn-secondary">Demander un Devis</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Signature -->
+    <section class="signature" id="signature">
+        <div class="container">
+            <div class="signature-content fade-in">
+                <div class="signature-text">
+                    <h2>Notre Savoir-Faire Exceptionnel</h2>
+                    <p>Chez <strong>HB clean</strong>, nous avons développé une approche unique du soin automobile, alliant tradition artisanale et innovations d'exception.</p>
+                    <p>Chaque véhicule qui nous est confié bénéficie d'une attention particulière, d'un diagnostic sur-mesure et de soins adaptés à sa personnalité.</p>
+                    <p>Notre philosophie : traiter chaque automobile comme une œuvre d'art, avec le respect et l'expertise qu'elle mérite.</p>
+                    <a href="#devis" class="cta-button" style="margin-top: 2rem;">Expérimenter l'Excellence</a>
+                </div>
+                <div class="signature-image"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section avec Cartes Améliorées -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nos Prestations</h2>
+                <p>Des services exclusifs conçus pour préserver et sublimer l'essence de votre véhicule</p>
+            </div>
+            <div class="services-grid">
+                <!-- Carte 1 - Nettoyage Intégral Prestige -->
+                <div class="service-card fade-in">
+                    <div class="service-img" style="background-image: url('images/pexels-pixabay-372810.jpg');">
+                 
+                    </div>
+                    <div class="service-content">
+                        <h3><i class="fas fa-spa"></i> Lavage auto et<br>Polish</h3>
+                        <ul class="service-features">
+                            
+                         
+                        <div class="service-footer">
+                            <div class="service-price">
+                                <span class="price-currency"></span>
+                                <span class="price-note"></span>
+                            </div>
+                            <div class="service-duration"></div>
+                        </div>
+                        <a href="#devis" class="cta-button" style="width: 100%; text-align: center; display: block; margin-top: 1.5rem;">Programmer ce service</a>
+                    </div>
+                </div>
+
+                <!-- Carte 2 - Protection Céramique Diamant -->
+                <div class="service-card fade-in">
+                    <div class="service-img" style="background-image: url('images/pexels-artempodrez-8986177.jpg');">
+                        
+                    </div>
+                    <div class="service-content">
+                        <h3><i class="fas fa-gem"></i> Parbrise et Mecaniques</h3>
+                     
+                    
+                        <div class="service-footer">
+                            <div class="service-price">
+                                <span class="price-currency"></span>
+                                <span class="price-note"></span>
+                            </div>
+                            <div class="service-duration"></div>
+                        </div>
+                        <a href="#devis" class="cta-button" style="width: 100%; text-align: center; display: block; margin-top: 1.5rem;">Programmer ce service</a>
+                    </div>
+                </div>
+                <!-- Carte 3 - Rénovation Intégrale Sur-Mesure -->
+                <div class="service-card fade-in">
+                    <div class="service-img" style="background-image: url('images/pexels-tima-miroshnichenko-6873101.jpg');">
+                        
+                    </div>
+                    <div class="service-content">
+                        <h3><i class="fas fa-tools"></i> Renovations jantes et Phares</h3>
+                        
+                        <div class="service-footer">
+                            <div class="service-price">
+                                <span class="price-currency"></span>
+                                <span class="price-note"></span>
+                            </div>
+                            <div class="service-duration"></div>
+                        </div>
+                        <a href="#devis" class="cta-button" style="width: 100%; text-align: center; display: block; margin-top: 1.5rem;">Programmer ce service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Réalisations Section -->
+    <section class="realisations" id="realisations">
+        <div class="container">
+            <div class="section-title section-title-light">
+                <h2>Nos Réalisations</h2>
+                <p>L'évidence de la perfection à travers nos réalisations les plus prestigieuses</p>
+            </div>
+            <div class="gallery">
+                <div class="gallery-item fade-in">
+                    <img src="images/1000004884.jpg" alt="Mercedes Classe S" class="gallery-img">
+                    <div class="gallery-overlay">
+                      
+                    </div>
+                </div>
+                <div class="gallery-item fade-in">
+                    <img src="images/1000004885.jpg" alt="Porsche 911" class="gallery-img">
+                    <div class="gallery-overlay">
+                  
+                    </div>
+                </div>
+               
+                <div class="gallery-item fade-in">
+                    <img src="images/1000004886.jpg" alt="Audi R8" class="gallery-img">
+                    <div class="gallery-overlay">
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Devis Section Luxueuse -->
+    <section class="devis" id="devis">
+    <div class="container">
+        <div class="devis-container">
+            <div class="devis-content fade-in">
+                <h2>Devis Sur-Mesure</h2>
+                <p>Notre approche exclusive commence par une évaluation personnalisée de votre véhicule. Chaque détail compte dans notre quête de perfection.</p>
+                <p>Laissez-nous vous guider vers la prestation qui sublimera l'essence même de votre automobile, qu'il s'agisse d'une berline d'exception ou d'un bolide de légende.</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+33 7 45 32 55 68</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>Parisglassauto@outlook.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>10 rue des bois rochefort, Sartrouville, France 78500</span>
+                    </div>
+                </div>
+            </div>
+            <div class="devis-form fade-in">
+                <div class="form-header">
+                    <div class="form-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h3 class="form-title">Demande de Devis</h3>
+                    <p class="form-subtitle">Remplissez ce formulaire et notre équipe vous contactera sous 24h</p>
+                </div>
+                
+                <form id="form-devis">
+                    <!-- Message de statut pour EmailJS -->
+                    <div id="form-status" class="status-message" style="display: none;"></div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nom">Nom complet *</label>
+                            <input type="text" id="nom" name="nom" class="form-control" required placeholder="Votre nom et prénom">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Adresse email *</label>
+                            <input type="email" id="email" name="email" class="form-control" required placeholder="votre@email.com">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="telephone">Téléphone *</label>
+                            <input type="tel" id="telephone" name="telephone" class="form-control" required placeholder="Votre numéro">
+                        </div>
+                        <div class="form-group">
+                            <label for="vehicule">Type de véhicule *</label>
+                            <select id="vehicule" name="vehicule" class="form-control form-select" required>
+                                <option value="">Sélectionnez...</option>
+                                <option value="berline">Berline de luxe</option>
+                                <option value="suv">SUV Prestige</option>
+                                <option value="sportive">Voiture sportive</option>
+                                <option value="hypercar">Hypercar</option>
+                                <option value="collection">Véhicule de collection</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="marque">Marque et modèle *</label>
+                        <input type="text" id="marque" name="marque" class="form-control" required placeholder="Ex: Mercedes Classe S">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="service">Prestation souhaitée *</label>
+                            <select id="service" name="service" class="form-control form-select" required>
+                                <option value="">Sélectionnez...</option>
+                                <option value="lavage-integral">Lavage auto et Polish</option>
+                                <option value="protection-ceramique">Parbrise et Mécaniques</option>
+                                <option value="renovation">Rénovations Jantes et Phares</option>
+                                <option value="forfait-complet">Forfait Complet Excellence</option>
+                                <option value="autre">Prestation personnalisée</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Date souhaitée *</label>
+                            <input type="date" id="date" name="date" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Exigences particulières</label>
+                        <textarea id="message" name="message" class="form-control" placeholder="Décrivez vos attentes spécifiques, particularités de votre véhicule..."></textarea>
+                    </div>
+                    
+                    <div class="form-footer">
+                        <p class="form-note">* Champs obligatoires</p>
+                        <button type="submit" class="submit-btn" id="submit-btn">
+                            <i class="fas fa-paper-plane" style="margin-right: 10px;"></i>
+                            Obtenir mon devis personnalisé
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>À Notre Auto</h3>
+                    <p>L'excellence du détail automobile alliant tradition artisanale et innovations d'avant-garde pour une expérience sensorielle inégalée.</p>
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/hb.cleanparis/"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Nos Prestations</h3>
+                    <a href="#services">Nettoyage Intégral Prestige</a>
+                    <a href="#services">Protection Céramique Diamant</a>
+                    <a href="#services">Rénovation Intégrale</a>
+                    <a href="#services">Forfaits Personnalisés</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact & Accès</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 10 rue des bois rochefort, Sartrouville, France 78500</p>
+                    <p><i class="fas fa-phone"></i> +33 7 45 32 55 68</p>
+                    <p><i class="fas fa-envelope"></i> Parisglassauto@outlook.com</p>
+                    <p><i class="fas fa-clock"></i> 7j/7j</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Services Exclusifs</h3>
+                    <a href="#">Service Concierge</a>
+                    <a href="#">Prise en charge sur rendez-vous</a>
+                    <a href="#">Espace détente client</a>
+                    <a href="#">Programme fidélité Prestige</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 À Notre Auto. Tous droits réservés. | L'art du détail automobile</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialisation d'EmailJS avec votre User ID
+        (function() {
+            // ⚠️ REMPLACEZ CETTE CLÉ PAR VOTRE VRAI USER ID EMAILJS ⚠️
+            emailjs.init("eTPfcl2riuDuPrxs8"); 
+        })();
+
+        // Carrousel d'images
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.carousel-slide');
+            let currentSlide = 0;
+            
+            function nextSlide() {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }
+            
+            // Changer d'image toutes les 6 secondes
+            setInterval(nextSlide, 6000);
+        });
+
+        // Header scroll effect - Transparent au début, visible au scroll
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a, .hero-buttons a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+                
+                // Fermer le menu mobile après clic
+                const navMenu = document.getElementById('navMenu');
+                const menuToggle = document.getElementById('menuToggle');
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInOnScroll = function() {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', fadeInOnScroll);
+        // Initial check in case elements are already in view
+        fadeInOnScroll();
+
+        // Form submission avec EmailJS - CORRIGÉ
+        document.getElementById('form-devis').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submit-btn');
+            const statusMessage = document.getElementById('form-status');
+            
+            // Afficher le statut d'envoi
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin" style="margin-right: 10px;"></i> Envoi en cours...';
+            statusMessage.style.display = 'none';
+            
+            // Récupérer les données du formulaire
+            const formData = {
+                nom: document.getElementById('nom').value,
+                email: document.getElementById('email').value,
+                telephone: document.getElementById('telephone').value,
+                vehicule: document.getElementById('vehicule').value,
+                marque: document.getElementById('marque').value,
+                service: document.getElementById('service').value,
+                date: document.getElementById('date').value,
+                message: document.getElementById('message').value,
+                date_envoi: new Date().toLocaleString('fr-FR')
+            };
+            
+            // ⚠️ REMPLACEZ CES IDs PAR VOS VRAIS IDs EMAILJS ⚠️
+            // service_id et template_id
+            emailjs.send('service_qeqh88x', 'template_0w70lic', formData)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    
+                    // Afficher le message de succès
+                    statusMessage.textContent = '✅ Votre demande de devis a été envoyée avec succès ! Notre équipe vous contactera dans les plus brefs délais.';
+                    statusMessage.className = 'status-message status-success';
+                    statusMessage.style.display = 'block';
+                    
+                    // Réinitialiser le formulaire
+                    document.getElementById('form-devis').reset();
+                    
+                    // Réactiver le bouton
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane" style="margin-right: 10px;"></i> Obtenir mon devis personnalisé';
+                    
+                    // Faire défiler vers le haut du formulaire pour voir le message
+                    document.querySelector('.devis-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    
+                    // Afficher le message d'erreur
+                    statusMessage.textContent = '❌ Une erreur s\'est produite lors de l\'envoi de votre demande. Veuillez réessayer ou nous contacter directement au +33 7 45 32 55 68.';
+                    statusMessage.className = 'status-message status-error';
+                    statusMessage.style.display = 'block';
+                    
+                    // Réactiver le bouton
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane" style="margin-right: 10px;"></i> Obtenir mon devis personnalisé';
+                    
+                    // Faire défiler vers le haut du formulaire pour voir le message
+                    document.querySelector('.devis-form').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+        });
+
+        // Add some luxury effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add subtle parallax effect to hero
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const hero = document.querySelector('.hero');
+                hero.style.transform = 'translateY(' + (scrolled * 0.5) + 'px)';
+            });
+        });
+        
+        // Menu hamburger toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        menuToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+        
+        // Fermer le menu en cliquant à l'extérieur
+        document.addEventListener('click', function(event) {
+            const isClickInsideMenu = navMenu.contains(event.target) || menuToggle.contains(event.target);
+            if (!isClickInsideMenu && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+
+        // Debug function pour tester EmailJS
+        function testEmailJS() {
+            console.log("Test EmailJS...");
+            emailjs.send("service_qeqh88x", "template_0w70lic", {
+                nom: "Test",
+                email: "test@test.com",
+                telephone: "0123456789",
+                vehicule: "berline",
+                marque: "Test Marque", 
+                service: "lavage-integral",
+                date: "2024-01-01",
+                message: "Message test",
+                date_envoi: new Date().toLocaleString('fr-FR')
+            }).then(
+                response => console.log("Test réussi:", response),
+                error => console.log("Test échoué:", error)
+            );
+        }
+        
+        // Décommentez la ligne suivante pour tester EmailJS
+        // testEmailJS();
+    </script>
+</body>
+</html>
